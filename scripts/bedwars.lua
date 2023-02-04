@@ -384,20 +384,18 @@ do
 							    local Entity = v.Character
 							    local target = v.Character:GetPrimaryPartCFrame().Position
 							    attackentitycont:CallServer({
-								["chargedAttack"] = {["chargeRatio"] = 1},
-								["weapon"] = GBW ~= nil and GBW.tool,
-								["entityInstance"] = Entity,
-								["validate"] = {["targetPosition"] = {["value"] = target,
-								    ["hash"] = hvFunc(target)},
-								    ["raycast"] = {
-									["cameraPosition"] = hvFunc(cam.CFrame.Position), 
-									["cursorDirection"] = hvFunc(Ray.new(cam.CFrame.Position, v.Character:GetPrimaryPartCFrame().Position).Unit.Direction)
-								    },
-								    ["selfPosition"] = {["value"] = selfPosition,
-									["hash"] = hvFunc(selfPosition)
-								    }
-								}
-							    })
+								["weapon"] =  GBW ~= nil and GBW.tool,
+                                            ["entityInstance"] = Entity,
+                                            ["validate"] = {
+                                                ["raycast"] = {
+                                                    ["cameraPosition"] = hvFunc(cam.CFrame.Position), 
+                                                    ["cursorDirection"] = hvFunc(Ray.new(cam.CFrame.Position, v.Character:FindFirstChild("HumanoidRootPart").Position).Unit.Direction)
+                                                },
+                                                ["targetPosition"] = hvFunc(v.Character:FindFirstChild("HumanoidRootPart").Position),
+                                                ["selfPosition"] = hvFunc(selfPosition),
+                                            }, 
+                                            ["chargedAttack"] = {["chargeRatio"] = 1},
+                                        })
 							    if killauraissoundenabled["Value"] then
 								playsound("rbxassetid://6760544639", killaurasoundvalue["Value"])
 							    end
